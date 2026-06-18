@@ -1,0 +1,9 @@
+# Cloudflare Pages — 排除原始素材與開發產物，不部署
+# https://developers.cloudflare.com/pages/configuration/assetsignore/
+
+img/
+fonnts/
+font-preview.html
+puremosa_final.html
+events/mangzhong-2026-0605/index.original.html
+.DS_Store

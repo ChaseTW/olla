@@ -1,0 +1,8 @@
+# 複製此檔為 terraform.tfvars 並填入實際值。
+#   cp terraform.tfvars.example terraform.tfvars
+# terraform.tfvars 已被 .gitignore 排除，不會進版控。
+
+account_id   = "在此填入 Cloudflare Account ID"
+zone_id      = "在此填入 penfungo.com 的 Zone ID"
+domain       = "penfungo.com"
+project_name = "penfungo-web"

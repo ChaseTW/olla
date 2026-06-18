@@ -1,0 +1,528 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>字體預覽 · Type Specimen ｜ 順事 · 芒種</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" />
+
+<style>
+  /* ── Fonts under review (full files, loaded from fonnts/) ── */
+  @font-face { font-family:"Taipei Sans TC"; src:url("fonnts/TaipeiSansTCBeta-Light.ttf")   format("truetype"); font-weight:300; }
+  @font-face { font-family:"Taipei Sans TC"; src:url("fonnts/TaipeiSansTCBeta-Regular.ttf") format("truetype"); font-weight:400; }
+  @font-face { font-family:"Taipei Sans TC"; src:url("fonnts/TaipeiSansTCBeta-Bold.ttf")    format("truetype"); font-weight:700; }
+
+  @font-face { font-family:"BC Novatica"; src:url("fonnts/fonnts.com-BC_Novatica_CYR_Light.otf")    format("opentype"); font-weight:300; }
+  @font-face { font-family:"BC Novatica"; src:url("fonnts/fonnts.com-BC_Novatica_CYR_Regular.otf")  format("opentype"); font-weight:400; }
+  @font-face { font-family:"BC Novatica"; src:url("fonnts/fonnts.com-BC_Novatica_CYR_Medium.otf")   format("opentype"); font-weight:500; }
+  @font-face { font-family:"BC Novatica"; src:url("fonnts/fonnts.com-BC_Novatica_CYR_SemiBold.otf") format("opentype"); font-weight:600; }
+  @font-face { font-family:"BC Novatica"; src:url("fonnts/fonnts.com-BC_Novatica_CYR_Bold.otf")     format("opentype"); font-weight:700; }
+
+  @font-face { font-family:"Adobe Ming"; src:url("fonnts/AdobeMingStd-Light.otf") format("opentype"); font-weight:300; }
+  @font-face { font-family:"Ku Mincho";  src:url("fonnts/KuMincho-R.otf")         format("opentype"); font-weight:400; }
+
+  @font-face { font-family:"The Signature"; src:url("fonnts/Thesignature.otf") format("opentype"); }
+
+  :root{
+    --bg:#04201E; --bg-2:#073A35;
+    --gold:#F6E27A; --gold-glow:#FFF2B2;
+    --ivory:#FBF7EE; --ivory-dim:rgba(251,247,238,.7); --ivory-fade:rgba(251,247,238,.4);
+    --green:#0D8B7D; --mint:#67D7D1; --seal:#C53B2C;
+    --line:rgba(246,226,122,.22);
+    --tc:"Taipei Sans TC","PingFang TC",sans-serif;
+    --nov:"BC Novatica","Helvetica Neue",sans-serif;
+    --corm:"Cormorant Garamond",serif;
+    --noto:"Noto Serif TC",serif;
+    --ming:"Adobe Ming","Songti TC",serif;
+    --ku:"Ku Mincho","Hiragino Mincho ProN",serif;
+    --sig:"The Signature","Snell Roundhand","Brush Script MT",cursive;
+    --song:"STSong","Songti TC","Songti SC",serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    background:
+      radial-gradient(ellipse 80% 50% at 50% 0%, rgba(13,139,125,.35) 0%, transparent 60%),
+      linear-gradient(180deg,var(--bg) 0%, var(--bg-2) 45%, var(--bg) 100%);
+    background-attachment:fixed;
+    color:var(--ivory);
+    font-family:var(--tc);
+    line-height:1.7;
+    -webkit-font-smoothing:antialiased;
+    padding:clamp(28px,6vw,80px) clamp(20px,5vw,80px) 120px;
+  }
+  .wrap{max-width:1080px;margin:0 auto;}
+
+  /* ── Page header ── */
+  .page-head{text-align:center;margin-bottom:84px;}
+  .page-head .kicker{
+    font-family:var(--corm);font-style:italic;font-size:.95rem;letter-spacing:.35em;
+    text-transform:uppercase;color:var(--gold);display:inline-flex;align-items:center;gap:16px;
+  }
+  .page-head .kicker::before,.page-head .kicker::after{
+    content:"";width:40px;height:1px;background:linear-gradient(to right,transparent,var(--gold),transparent);
+  }
+  .page-head h1{
+    font-family:var(--tc);font-weight:300;font-size:clamp(2.4rem,6vw,4rem);
+    letter-spacing:.12em;margin:22px 0 10px;
+  }
+  .page-head p{color:var(--ivory-dim);font-size:.95rem;letter-spacing:.12em;}
+  .page-head .corm{font-family:var(--corm);font-style:italic;}
+
+  /* ── Section scaffolding ── */
+  .sec{margin-bottom:96px;}
+  .sec-head{display:flex;align-items:baseline;gap:18px;flex-wrap:wrap;
+    border-bottom:1px solid var(--line);padding-bottom:18px;margin-bottom:40px;}
+  .sec-head .no{font-family:var(--corm);font-style:italic;font-size:1.6rem;color:var(--gold);}
+  .sec-head h2{font-family:var(--tc);font-weight:700;font-size:clamp(1.5rem,3vw,2.1rem);letter-spacing:.06em;}
+  .sec-head .meta{margin-left:auto;font-family:var(--corm);font-style:italic;
+    color:var(--ivory-fade);font-size:.9rem;letter-spacing:.08em;}
+
+  /* ── Weight cards (Taipei Sans) ── */
+  .weight-card{
+    border:1px solid rgba(246,226,122,.14);border-radius:18px;
+    background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,.01));
+    padding:clamp(24px,3.5vw,42px);margin-bottom:18px;
+  }
+  .weight-tag{
+    display:flex;align-items:baseline;gap:14px;margin-bottom:18px;
+    color:var(--gold);font-family:var(--corm);font-style:italic;font-size:1rem;letter-spacing:.1em;
+  }
+  .weight-tag .w-tc{font-family:var(--tc);font-style:normal;color:var(--ivory-fade);
+    font-size:.78rem;letter-spacing:.25em;}
+  .specimen-xl{font-family:var(--tc);font-size:clamp(3rem,9vw,6rem);line-height:1.12;
+    letter-spacing:.08em;}
+  .specimen-md{font-family:var(--tc);font-size:clamp(1.3rem,3vw,2rem);line-height:1.5;
+    letter-spacing:.1em;margin-top:14px;color:var(--ivory);}
+  .specimen-body{font-family:var(--tc);font-size:1.02rem;line-height:2.1;letter-spacing:.04em;
+    color:var(--ivory-dim);margin-top:18px;max-width:62ch;}
+
+  /* ── Solar terms grid ── */
+  .terms{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:10px;margin-top:8px;}
+  .terms span{
+    border:1px solid rgba(246,226,122,.14);border-radius:10px;padding:14px 6px;text-align:center;
+    font-family:var(--tc);font-weight:400;font-size:1.25rem;letter-spacing:.14em;
+    background:rgba(7,30,28,.4);
+  }
+  .terms span.cur{border-color:var(--gold);color:var(--gold);background:rgba(246,226,122,.08);}
+
+  /* ── Novatica rows ── */
+  .nov-row{
+    border:1px solid rgba(246,226,122,.14);border-radius:16px;padding:clamp(20px,3vw,34px);
+    margin-bottom:14px;background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,.01));
+  }
+  .nov-row .weight-tag{font-family:var(--nov);font-style:normal;}
+  .nov-big{font-family:var(--nov);font-size:clamp(2.2rem,6vw,3.6rem);letter-spacing:.04em;line-height:1.1;}
+  .nov-line{font-family:var(--nov);font-size:1.05rem;letter-spacing:.05em;color:var(--ivory-dim);
+    margin-top:12px;word-spacing:.1em;}
+  .glyphs{font-family:var(--nov);font-size:1.1rem;letter-spacing:.06em;color:var(--ivory-fade);
+    margin-top:10px;}
+
+  /* ── Numeral showcase ── */
+  .numerals{display:flex;flex-wrap:wrap;gap:clamp(24px,5vw,64px);margin-top:28px;align-items:flex-end;}
+  .numerals .n-item{display:flex;flex-direction:column;gap:8px;}
+  .numerals .n-val{font-size:clamp(2.6rem,7vw,4.4rem);line-height:1;color:var(--gold-glow);}
+  .numerals .n-lbl{font-family:var(--tc);font-size:.72rem;letter-spacing:.25em;color:var(--ivory-fade);}
+  .num-nov{font-family:var(--nov);font-weight:400;}
+  .num-corm{font-family:var(--corm);font-weight:500;}
+
+  /* ── Pairing comparison ── */
+  .pairings{display:grid;gap:20px;}
+  .pair{
+    position:relative;border:1px solid rgba(246,226,122,.16);border-radius:20px;
+    padding:clamp(28px,4.5vw,52px);text-align:center;overflow:hidden;
+    background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.012));
+  }
+  .pair.pick{border-color:var(--gold);box-shadow:0 0 60px -24px rgba(246,226,122,.5);}
+  .pair-flag{
+    position:absolute;top:0;left:50%;transform:translateX(-50%);
+    font-family:var(--corm);font-style:italic;font-size:.78rem;letter-spacing:.18em;
+    padding:5px 18px;border-radius:0 0 10px 10px;
+  }
+  .pair-flag.note{background:rgba(246,241,231,.08);color:var(--ivory-fade);}
+  .pair-flag.yours{background:var(--gold);color:var(--bg);font-style:normal;font-weight:600;font-family:var(--tc);}
+  .pair-label{font-family:var(--corm);font-style:italic;color:var(--gold);font-size:.95rem;
+    letter-spacing:.12em;margin:14px 0 26px;}
+  .pair-brand{font-size:.8rem;letter-spacing:.22em;color:var(--ivory-dim);margin-bottom:18px;}
+  .pair-title-row{display:flex;align-items:center;justify-content:center;
+    gap:clamp(16px,4vw,46px);flex-wrap:wrap;}
+  .pair-num{font-size:clamp(1.8rem,4vw,2.8rem);color:var(--ivory);}
+  .pair-title{font-size:clamp(2.6rem,8vw,5rem);letter-spacing:.14em;line-height:1;}
+  .pair-dot{display:inline-block;width:.22em;height:.22em;border-radius:50%;
+    background:var(--gold);vertical-align:.28em;margin:0 .3em;}
+  .pair-sub{margin-top:22px;font-size:.92rem;letter-spacing:.16em;color:var(--ivory-dim);}
+  .pair-stack{margin-top:20px;font-family:var(--corm);font-style:italic;
+    color:var(--ivory-fade);font-size:.84rem;letter-spacing:.06em;}
+
+  /* font assignments per pairing */
+  .ff-serif .pair-brand,.ff-serif .pair-sub{font-family:var(--corm);font-style:italic;}
+  .ff-serif .pair-num{font-family:var(--corm);}
+  .ff-serif .pair-title{font-family:var(--noto);font-weight:300;}
+
+  .ff-hybrid .pair-brand,.ff-hybrid .pair-sub{font-family:var(--corm);font-style:italic;}
+  .ff-hybrid .pair-num{font-family:var(--corm);}
+  .ff-hybrid .pair-title{font-family:var(--tc);font-weight:300;}
+
+  .ff-sans .pair-brand,.ff-sans .pair-sub{font-family:var(--nov);}
+  .ff-sans .pair-num{font-family:var(--nov);font-weight:300;}
+  .ff-sans .pair-title{font-family:var(--tc);font-weight:300;}
+
+  /* ── Serif section overrides (Adobe Ming / Ku Mincho) ── */
+  .ming .specimen-xl,.ming .specimen-md,.ming .specimen-body,.ming .terms span{font-family:var(--ming);}
+  .ku   .specimen-xl,.ku   .specimen-md,.ku   .specimen-body,.ku   .terms span{font-family:var(--ku);}
+  .song .specimen-xl,.song .specimen-md,.song .specimen-body,.song .terms span{font-family:var(--song);}
+
+  /* ── Serif hero comparison ── */
+  .serif-cmp{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;}
+  .sc-cell{border:1px solid rgba(246,226,122,.14);border-radius:16px;
+    padding:clamp(24px,3.4vw,40px);text-align:center;
+    background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,.01));}
+  .sc-name{font-family:var(--corm);font-style:italic;color:var(--gold);
+    font-size:.9rem;letter-spacing:.12em;margin-bottom:20px;}
+  .sc-hero{font-size:clamp(2.6rem,7vw,3.7rem);letter-spacing:.12em;line-height:1.14;}
+  .sc-sub{margin-top:16px;font-size:.9rem;letter-spacing:.1em;color:var(--ivory-dim);}
+  .sc-cell.ming .sc-hero{font-family:var(--ming);}
+  .sc-cell.ku   .sc-hero{font-family:var(--ku);}
+  .sc-cell.song .sc-hero{font-family:var(--song);}
+  .sc-cell.noto .sc-hero{font-family:var(--noto);font-weight:300;}
+
+  /* ── The Signature (script display) ── */
+  .sig-card{text-align:center;}
+  .sig-hero{font-family:var(--sig);font-size:clamp(3.4rem,12vw,7.5rem);
+    line-height:1.18;color:var(--gold-glow);}
+  .sig-hero.sm{font-size:clamp(2.4rem,8vw,4.6rem);color:var(--ivory);margin-top:2px;}
+  .sig-glyphs{font-family:var(--sig);font-size:clamp(1.7rem,4.5vw,2.7rem);
+    line-height:1.8;color:var(--ivory-dim);}
+  .sig-ctx .l1{font-family:var(--sig);font-size:clamp(2rem,5.5vw,3.4rem);
+    color:var(--gold);line-height:1.4;}
+  .sig-ctx .l2{font-family:var(--sig);font-size:clamp(1.5rem,4vw,2.4rem);
+    color:var(--ivory-dim);margin-top:4px;line-height:1.4;}
+
+  .foot{text-align:center;margin-top:96px;color:var(--ivory-fade);font-size:.82rem;
+    letter-spacing:.1em;line-height:2;font-family:var(--corm);font-style:italic;}
+  .foot b{color:var(--ivory-dim);font-family:var(--tc);font-style:normal;font-weight:400;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="page-head">
+    <div class="kicker">Type Specimen</div>
+    <h1>字體預覽</h1>
+    <p>為 <span class="corm">順事 · 芒種</span> 餐酒邀請頁準備的字體 ─ fonnts/ 5 款 + 系統／網路字體比較</p>
+  </header>
+
+  <!-- ════ Taipei Sans TC ════ -->
+  <section class="sec">
+    <div class="sec-head">
+      <span class="no">01</span>
+      <h2>Taipei Sans TC Beta</h2>
+      <span class="meta">中文 · 無襯線 · 3 weights · 你提供</span>
+    </div>
+
+    <div class="weight-card">
+      <div class="weight-tag">Light<span class="w-tc">細 · 300</span></div>
+      <div class="specimen-xl" style="font-weight:300">順事芒種</div>
+      <div class="specimen-md" style="font-weight:300">夏熟之始 · 豐盛之初</div>
+      <p class="specimen-body" style="font-weight:300">
+        芒種，是夏季作物逐漸成熟、土地氣息轉為豐盛的時節。這一次，PUREMOSA 來到台北，
+        與和牛方程式共同呈現一場屬於芒種時節的風味餐會。
+      </p>
+    </div>
+
+    <div class="weight-card">
+      <div class="weight-tag">Regular<span class="w-tc">正 · 400</span></div>
+      <div class="specimen-xl" style="font-weight:400">順事芒種</div>
+      <div class="specimen-md" style="font-weight:400">夏熟之始 · 豐盛之初</div>
+      <p class="specimen-body" style="font-weight:400">
+        透過海味、肉香與風土琴酒之間的層次，展開一場輕盈而細緻的餐酒體驗。
+        順事琴酒的靈感來自屏北檸檬園的日照風景。
+      </p>
+    </div>
+
+    <div class="weight-card">
+      <div class="weight-tag">Bold<span class="w-tc">粗 · 700</span></div>
+      <div class="specimen-xl" style="font-weight:700">順事芒種</div>
+      <div class="specimen-md" style="font-weight:700">夏熟之始 · 豐盛之初</div>
+      <p class="specimen-body" style="font-weight:700">
+        在南方強烈的陽光下，花香、果香與空氣中的熱氣彼此交織，形成明亮、舒展且帶有土地感的風味輪廓。
+      </p>
+    </div>
+
+    <div class="weight-card">
+      <div class="weight-tag">二十四節氣<span class="w-tc">中文字符覆蓋測試</span></div>
+      <div class="terms">
+        <span>立春</span><span>雨水</span><span>驚蟄</span><span>春分</span><span>清明</span><span>穀雨</span>
+        <span>立夏</span><span>小滿</span><span class="cur">芒種</span><span>夏至</span><span>小暑</span><span>大暑</span>
+        <span>立秋</span><span>處暑</span><span>白露</span><span>秋分</span><span>寒露</span><span>霜降</span>
+        <span>立冬</span><span>小雪</span><span>大雪</span><span>冬至</span><span>小寒</span><span>大寒</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════ BC Novatica ════ -->
+  <section class="sec">
+    <div class="sec-head">
+      <span class="no">02</span>
+      <h2 style="font-family:var(--nov)">BC Novatica</h2>
+      <span class="meta">拉丁 / 數字 · 幾何無襯線 · 5 weights · 你提供</span>
+    </div>
+
+    <div class="nov-row">
+      <div class="weight-tag">Light · 300</div>
+      <div class="nov-big" style="font-weight:300">PUREMOSA × No6</div>
+      <div class="nov-line" style="font-weight:300">Seasonal Fine Dining Experience · Mangzhong 2026</div>
+      <div class="glyphs" style="font-weight:300">ABCDEFGHIJKLMNOPQRSTUVWXYZ&nbsp;&nbsp;abcdefghijklmnopqrstuvwxyz&nbsp;&nbsp;0123456789</div>
+    </div>
+    <div class="nov-row">
+      <div class="weight-tag">Regular · 400</div>
+      <div class="nov-big" style="font-weight:400">PUREMOSA × No6</div>
+      <div class="nov-line" style="font-weight:400">Seasonal Fine Dining Experience · Mangzhong 2026</div>
+      <div class="glyphs" style="font-weight:400">ABCDEFGHIJKLMNOPQRSTUVWXYZ&nbsp;&nbsp;abcdefghijklmnopqrstuvwxyz&nbsp;&nbsp;0123456789</div>
+    </div>
+    <div class="nov-row">
+      <div class="weight-tag">Medium · 500</div>
+      <div class="nov-big" style="font-weight:500">PUREMOSA × No6</div>
+      <div class="nov-line" style="font-weight:500">Seasonal Fine Dining Experience · Mangzhong 2026</div>
+      <div class="glyphs" style="font-weight:500">ABCDEFGHIJKLMNOPQRSTUVWXYZ&nbsp;&nbsp;abcdefghijklmnopqrstuvwxyz&nbsp;&nbsp;0123456789</div>
+    </div>
+    <div class="nov-row">
+      <div class="weight-tag">SemiBold · 600</div>
+      <div class="nov-big" style="font-weight:600">PUREMOSA × No6</div>
+      <div class="nov-line" style="font-weight:600">Seasonal Fine Dining Experience · Mangzhong 2026</div>
+      <div class="glyphs" style="font-weight:600">ABCDEFGHIJKLMNOPQRSTUVWXYZ&nbsp;&nbsp;abcdefghijklmnopqrstuvwxyz&nbsp;&nbsp;0123456789</div>
+    </div>
+    <div class="nov-row">
+      <div class="weight-tag">Bold · 700</div>
+      <div class="nov-big" style="font-weight:700">PUREMOSA × No6</div>
+      <div class="nov-line" style="font-weight:700">Seasonal Fine Dining Experience · Mangzhong 2026</div>
+      <div class="glyphs" style="font-weight:700">ABCDEFGHIJKLMNOPQRSTUVWXYZ&nbsp;&nbsp;abcdefghijklmnopqrstuvwxyz&nbsp;&nbsp;0123456789</div>
+    </div>
+
+    <div class="nov-row">
+      <div class="weight-tag">數字對照<span class="w-tc" style="font-family:var(--tc)">Novatica 幾何 vs. Cormorant 襯線</span></div>
+      <div class="numerals">
+        <div class="n-item"><span class="n-val num-nov">6.5</span><span class="n-lbl">Novatica</span></div>
+        <div class="n-item"><span class="n-val num-corm">6.5</span><span class="n-lbl">Cormorant</span></div>
+        <div class="n-item"><span class="n-val num-nov">19:00</span><span class="n-lbl">Novatica</span></div>
+        <div class="n-item"><span class="n-val num-corm">19:00</span><span class="n-lbl">Cormorant</span></div>
+        <div class="n-item"><span class="n-val num-nov">NT$1,200</span><span class="n-lbl">Novatica</span></div>
+        <div class="n-item"><span class="n-val num-corm">NT$1,200</span><span class="n-lbl">Cormorant</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════ The Signature ════ -->
+  <section class="sec">
+    <div class="sec-head">
+      <span class="no">03</span>
+      <h2 style="font-family:var(--sig);font-weight:400">The Signature</h2>
+      <span class="meta">拉丁 · 簽名手寫體 · 裝飾標題用 · 新增待選</span>
+    </div>
+
+    <div class="weight-card sig-card">
+      <div class="weight-tag" style="justify-content:center">Display<span class="w-tc">裝飾標題</span></div>
+      <div class="sig-hero">Mangzhong</div>
+      <div class="sig-hero sm">Puremosa</div>
+    </div>
+
+    <div class="weight-card">
+      <div class="weight-tag">字符集<span class="w-tc">大小寫 + 數字覆蓋測試</span></div>
+      <div class="sig-glyphs">
+        A B C D E F G H I J K L M<br />
+        N O P Q R S T U V W X Y Z<br />
+        a b c d e f g h i j k l m n o p q r s t u v w x y z<br />
+        0 1 2 3 4 5 6 7 8 9 &nbsp; &amp; . , ’ !
+      </div>
+    </div>
+
+    <div class="weight-card sig-card">
+      <div class="weight-tag" style="justify-content:center">情境<span class="w-tc">套用於品牌字</span></div>
+      <div class="sig-ctx">
+        <div class="l1">No6 Wagyu Formula</div>
+        <div class="l2">Seasonal Fine Dining Experience</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════ Adobe Ming Std ════ -->
+  <section class="sec ming">
+    <div class="sec-head">
+      <span class="no">04</span>
+      <h2 style="font-family:var(--ming)">Adobe Ming Std</h2>
+      <span class="meta">中文 · 明體襯線 · Light · 新增待選</span>
+    </div>
+
+    <div class="weight-card">
+      <div class="weight-tag">Light<span class="w-tc">明 · 傳統襯線</span></div>
+      <div class="specimen-xl">順事芒種</div>
+      <div class="specimen-md">夏熟之始 · 豐盛之初</div>
+      <p class="specimen-body">
+        芒種，是夏季作物逐漸成熟、土地氣息轉為豐盛的時節。Adobe Ming 為標準明體結構，
+        橫細直粗、起筆收筆帶有書法提按，適合營造典雅而具節氣感的標題氛圍。
+      </p>
+    </div>
+
+    <div class="weight-card">
+      <div class="weight-tag">二十四節氣<span class="w-tc">繁體字符覆蓋測試</span></div>
+      <div class="terms">
+        <span>立春</span><span>雨水</span><span>驚蟄</span><span>春分</span><span>清明</span><span>穀雨</span>
+        <span>立夏</span><span>小滿</span><span class="cur">芒種</span><span>夏至</span><span>小暑</span><span>大暑</span>
+        <span>立秋</span><span>處暑</span><span>白露</span><span>秋分</span><span>寒露</span><span>霜降</span>
+        <span>立冬</span><span>小雪</span><span>大雪</span><span>冬至</span><span>小寒</span><span>大寒</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════ Ku Mincho ════ -->
+  <section class="sec ku">
+    <div class="sec-head">
+      <span class="no">05</span>
+      <h2 style="font-family:var(--ku)">Ku Mincho</h2>
+      <span class="meta">日文 · 明朝體襯線 · Regular · 新增待選</span>
+    </div>
+
+    <div class="weight-card">
+      <div class="weight-tag">Regular<span class="w-tc">明朝 · 日系襯線</span></div>
+      <div class="specimen-xl">順事芒種</div>
+      <div class="specimen-md">夏熟之始 · 豐盛之初</div>
+      <p class="specimen-body">
+        Ku Mincho 為日文明朝體，字面較秀氣、筆畫對比柔和。注意：日文字體的漢字以日本字形為準，
+        部分繁體專用字（如「處」「蟄」）可能缺字或顯示為日式寫法 — 下方節氣表可直接檢查覆蓋率。
+      </p>
+    </div>
+
+    <div class="weight-card">
+      <div class="weight-tag">二十四節氣<span class="w-tc">繁體字符覆蓋測試 · 留意缺字</span></div>
+      <div class="terms">
+        <span>立春</span><span>雨水</span><span>驚蟄</span><span>春分</span><span>清明</span><span>穀雨</span>
+        <span>立夏</span><span>小滿</span><span class="cur">芒種</span><span>夏至</span><span>小暑</span><span>大暑</span>
+        <span>立秋</span><span>處暑</span><span>白露</span><span>秋分</span><span>寒露</span><span>霜降</span>
+        <span>立冬</span><span>小雪</span><span>大雪</span><span>冬至</span><span>小寒</span><span>大寒</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════ 華文宋體 STSong ════ -->
+  <section class="sec song">
+    <div class="sec-head">
+      <span class="no">06</span>
+      <h2 style="font-family:var(--song)">華文宋體 · STSong</h2>
+      <span class="meta">中文 · 宋體襯線 · macOS 系統字體 · 新增待選</span>
+    </div>
+
+    <div class="weight-card">
+      <div class="weight-tag">Regular<span class="w-tc">宋 · 系統內建</span></div>
+      <div class="specimen-xl">順事芒種</div>
+      <div class="specimen-md">夏熟之始 · 豐盛之初</div>
+      <p class="specimen-body">
+        華文宋體（STSong）為 macOS 內建宋體，橫細直粗、結構工整。屬簡體中文字體 ─
+        繁體字以簡體系統的字形邏輯呈現，挑選時請留意字形是否符合繁體閱讀習慣。
+        注意：系統字體無法直接嵌入網站，正式採用需另行授權，或改用可商用的替代宋體。
+      </p>
+    </div>
+
+    <div class="weight-card">
+      <div class="weight-tag">二十四節氣<span class="w-tc">字符覆蓋 · 繁／簡字形檢查</span></div>
+      <div class="terms">
+        <span>立春</span><span>雨水</span><span>驚蟄</span><span>春分</span><span>清明</span><span>穀雨</span>
+        <span>立夏</span><span>小滿</span><span class="cur">芒種</span><span>夏至</span><span>小暑</span><span>大暑</span>
+        <span>立秋</span><span>處暑</span><span>白露</span><span>秋分</span><span>寒露</span><span>霜降</span>
+        <span>立冬</span><span>小雪</span><span>大雪</span><span>冬至</span><span>小寒</span><span>大寒</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════ Serif hero comparison ════ -->
+  <section class="sec">
+    <div class="sec-head">
+      <span class="no">07</span>
+      <h2>中文襯線 · 四款對照</h2>
+      <span class="meta">同一句 Hero · 直接比較宋／明體選擇</span>
+    </div>
+
+    <div class="serif-cmp">
+      <div class="sc-cell ming">
+        <div class="sc-name">Adobe Ming Std</div>
+        <div class="sc-hero">順事 · 芒種</div>
+        <div class="sc-sub">繁體明體 · 10&nbsp;MB 原檔</div>
+      </div>
+      <div class="sc-cell ku">
+        <div class="sc-name">Ku Mincho</div>
+        <div class="sc-hero">順事 · 芒種</div>
+        <div class="sc-sub">日文明朝 · 3.2&nbsp;MB 原檔</div>
+      </div>
+      <div class="sc-cell song">
+        <div class="sc-name">華文宋體 STSong</div>
+        <div class="sc-hero">順事 · 芒種</div>
+        <div class="sc-sub">macOS 系統宋體 · 不可嵌入</div>
+      </div>
+      <div class="sc-cell noto">
+        <div class="sc-name">Noto Serif TC</div>
+        <div class="sc-hero">順事 · 芒種</div>
+        <div class="sc-sub">原設計稿襯線 · Google Fonts</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════ Pairing comparison ════ -->
+  <section class="sec">
+    <div class="sec-head">
+      <span class="no">08</span>
+      <h2>三種搭配 · 同一個 Hero</h2>
+      <span class="meta">用實際首屏文字對照</span>
+    </div>
+
+    <div class="pairings">
+      <div class="pair ff-serif">
+        <span class="pair-flag note">原設計稿</span>
+        <div class="pair-label">A · Noto Serif TC × Cormorant Garamond</div>
+        <div class="pair-brand">NO6 WAGYU FORMULA &nbsp;×&nbsp; PUREMOSA</div>
+        <div class="pair-title-row">
+          <span class="pair-num">6.5</span>
+          <span class="pair-title">順事<span class="pair-dot"></span>芒種</span>
+          <span class="pair-num">19:00</span>
+        </div>
+        <div class="pair-sub">Seasonal Fine Dining Experience</div>
+        <div class="pair-stack">襯線 · 編輯雜誌感 ─ 設計原本的方向</div>
+      </div>
+
+      <div class="pair ff-hybrid">
+        <span class="pair-flag note">混搭</span>
+        <div class="pair-label">B · Taipei Sans TC × Cormorant Garamond</div>
+        <div class="pair-brand">NO6 WAGYU FORMULA &nbsp;×&nbsp; PUREMOSA</div>
+        <div class="pair-title-row">
+          <span class="pair-num">6.5</span>
+          <span class="pair-title">順事<span class="pair-dot"></span>芒種</span>
+          <span class="pair-num">19:00</span>
+        </div>
+        <div class="pair-sub">Seasonal Fine Dining Experience</div>
+        <div class="pair-stack">中文無襯線 · 英數保留襯線</div>
+      </div>
+
+      <div class="pair ff-sans pick">
+        <span class="pair-flag yours">你的選擇</span>
+        <div class="pair-label">C · Taipei Sans TC × BC Novatica</div>
+        <div class="pair-brand">NO6 WAGYU FORMULA &nbsp;×&nbsp; PUREMOSA</div>
+        <div class="pair-title-row">
+          <span class="pair-num">6.5</span>
+          <span class="pair-title">順事<span class="pair-dot"></span>芒種</span>
+          <span class="pair-num">19:00</span>
+        </div>
+        <div class="pair-sub">Seasonal Fine Dining Experience</div>
+        <div class="pair-stack">中英全無襯線 ─ 目前已套用於 index.html</div>
+      </div>
+    </div>
+  </section>
+
+  <p class="foot">
+    <b>備註</b> ─ 本預覽頁直接載入 fonnts/ 內的完整字體檔（TTF / OTF），僅供挑選比較。<br />
+    <b>華文宋體（STSong）</b>為 macOS 系統字體，僅在已安裝的裝置上顯示、無法直接嵌入網站，正式採用需另行授權。<br />
+    正式頁面 index.html 已採用 <b>C 方案</b>，中英文字體皆經 subset 壓縮為 WOFF2（中文約 82&nbsp;KB、英文約 21&nbsp;KB／重量）。
+  </p>
+
+</div>
+</body>
+</html>

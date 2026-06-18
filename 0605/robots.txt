@@ -1,0 +1,24 @@
+# robots.txt — penfungo.com
+# 放置位置：必須在網域根目錄 → https://penfungo.com/robots.txt
+# （Cloudflare Pages：放在部署資料夾的最上層）
+
+User-agent: *
+Allow: /
+
+# 明確歡迎 AI 檢索器（GEO）—— 預設已允許，此處宣示立場
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+Sitemap: https://penfungo.com/sitemap.xml

@@ -1,0 +1,10 @@
+# Terraform — 不進版控的檔案
+*.tfstate
+*.tfstate.*
+*.tfvars
+!*.tfvars.example
+.terraform/
+crash.log
+crash.*.log
+
+# .terraform.lock.hcl 應「保留」並進版控（鎖定 provider 版本，確保可重現）
