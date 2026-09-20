@@ -2,7 +2,7 @@
 
 版本：0.1  
 規劃日期：2026-09-20  
-狀態：執行計畫／尚未部署  
+狀態：Cloudflare MVP Preview 已部署；Production 尚未變更
 正式網域：`https://penfungo.com`  
 Cloudflare Pages 專案：`penfungo-web`
 
@@ -29,14 +29,15 @@ Cloudflare Pages 專案：`penfungo-web`
 ## 2. 現況基線
 
 - Git remote：`git@github.com:ChaseTW/olla.git`
-- 目前提交：`dafba5a90340ded294d47822ef1a054aa79e8a64`
-- 目前 checkout：detached HEAD；實作前建立 `codex/penfungo-brand-site` 工作分支。
+- 活動站整合前基線：`dafba5a90340ded294d47822ef1a054aa79e8a64`
+- MVP 程式與規範提交：`1dec8f2`，已推送至 `origin/main`。
+- 目前 checkout：`main`。
 - Cloudflare Pages：Direct Upload，專案 `penfungo-web`，production branch 名稱為 `main`。
 - 現行部署目錄：`0605/`。
 - 現行根路徑由 `0605/_redirects` 以 302 導向活動頁。
 - `penfungo.com` 已實測由 Cloudflare 回應，根路徑目前回傳 302 至既有活動頁。
 - 現行部署方式：`npx wrangler pages deploy 0605 --project-name=penfungo-web --branch=main`。
-- 本機與環境目前沒有可用的 Cloudflare API Token；開始遠端 preview／production 部署前需由專案擁有者提供最小權限憑證。
+- Wrangler OAuth 已完成登入；Preview 已可部署與查詢。若日後改為 CI，自動化流程需另設最小權限 API Token。
 
 ## 3. 版本策略
 
@@ -142,10 +143,18 @@ Cloudflare Pages 專案：`penfungo-web`
 ```sh
 npx -y wrangler pages deploy 0605 \
   --project-name=penfungo-web \
-  --branch=brand-rc-2
+  --branch=brand-mvp-v1
 ```
 
-preview URL 預期為 `brand-rc-2.penfungo-web.pages.dev`，實際網址以 Wrangler 回傳為準。Preview deployment 仍可能被知道網址的人存取；內容若不能外流，需先加 Cloudflare Access，不能只把 noindex 當權限控制。
+2026-09-20 已部署：
+
+- 唯一網址：`https://9ce17207.penfungo-web.pages.dev/`
+- 分支別名：`https://brand-mvp-v1.penfungo-web.pages.dev/`
+- Deployment ID：`9ce17207-10d1-4ae9-9315-e9154af0c692`
+- 對應 Git main：`1dec8f2`
+- 發布前 production deployment：`12f2f20c-78dc-4c3c-b60e-32805e9bd860`
+
+首頁、About、Services、Work、PUREMOSA case、Contact 與既有活動頁回傳 200；`/journal/` 回傳 404；Preview 回應包含 `X-Robots-Tag: noindex`。正式 `penfungo.com` 仍維持原活動頁 302。Preview deployment 仍可能被知道網址的人存取；內容若不能外流，需先加 Cloudflare Access，不能只把 noindex 當權限控制。
 
 Preview 驗收完成前，不使用 `--branch=main`。
 
@@ -206,9 +215,9 @@ npx -y wrangler pages deploy 0605 \
 
 ### Phase B｜Cloudflare Preview
 
-- 取得最小權限 API Token。
+- 完成 Wrangler OAuth 登入；若改由 CI 執行，才建立最小權限 API Token。
 - 記錄現行 production deployment。
-- 部署 `brand-rc-2` preview 並驗收。
+- 部署 `brand-mvp-v1` preview 並驗收。
 
 完成定義：Cloudflare preview 路由、畫面、headers、活動頁和 noindex 均符合預期。
 
@@ -233,6 +242,6 @@ npx -y wrangler pages deploy 0605 \
 
 以下項目不阻塞 Phase A 本機整合，但會阻塞相應階段：
 
-- Phase B：缺 Cloudflare API Token。
+- Phase B 已完成：已使用 Wrangler OAuth 部署並驗證 MVP Preview。
 - Phase C／D：缺正式 Logo／照片、案例公開核准、正式聯絡管道。
-- Phase D：缺 production 公開清單與最终发布确认。
+- Phase D：缺 production 公開清單與最終發布確認。

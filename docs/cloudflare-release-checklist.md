@@ -5,7 +5,7 @@
 適用專案：Cloudflare Pages `penfungo-web`（Direct Upload）  
 正式網域：`https://penfungo.com`  
 Production branch：`main`  
-Preview branch：`brand-rc-2`
+Preview branch：`brand-mvp-v1`
 
 ## 1. 發布邊界
 
@@ -13,21 +13,23 @@ Preview branch：`brand-rc-2`
 - 必須保留 `/events/mangzhong-2026-0605/` 及其圖片、字型、互動、報名連結與既有 SEO 結構。
 - 首版不發布「地方筆記」：`journal/` 不得進入部署輸出、導覽、首頁連結或 sitemap，公開網址應回傳 `404`。
 - 主站首版為靜態資源；除非另行核准並實作 Cloudflare Pages Function，聯絡表單不得呈現為可成功送出。
-- Preview 使用 `brand-rc-2`；只有完成驗收後才可部署 `main`。
+- Preview 使用 `brand-mvp-v1`；只有完成驗收後才可部署 `main`。
 - 不執行 Terraform `apply`。現有 Pages 專案、網域與 DNS 已存在，本次只是更新網站內容。
 
 ## 2. 目前已知狀態與硬性閘門
 
-截至 2026-09-20，本機實測：
+截至 2026-09-20，本機與 Cloudflare 實測：
 
 - Git branch：`main`
-- 基線 commit：`dafba5a90340ded294d47822ef1a054aa79e8a64`
-- 品牌站檔案目前尚有未追蹤項目；發布前必須先由整合負責人整理、驗證並建立可追溯 commit。
-- `CLOUDFLARE_API_TOKEN`：**缺少**
-- `.cloudflare_token`：**缺少**
-- `npx`：可用
+- 活動站整合前基線 commit：`dafba5a90340ded294d47822ef1a054aa79e8a64`
+- MVP 程式與規範 commit：`1dec8f2`
+- `main` 已推送至 `origin/main`；品牌站檔案已納入版控。
+- Wrangler OAuth：已登入，可查詢與部署 `penfungo-web`。
+- `CLOUDFLARE_API_TOKEN` 與 `.cloudflare_token` 未使用；目前互動式操作以 OAuth 完成。
+- Preview deployment：`9ce17207-10d1-4ae9-9315-e9154af0c692`
+- 發布前 production deployment：`12f2f20c-78dc-4c3c-b60e-32805e9bd860`
 
-缺少 token 時，不可執行 preview、查詢 deployment 或 production 部署。取得 token 後，只放在環境變數或未納入版控的 `.cloudflare_token`；不得寫入文件、原始碼、commit、終端截圖或 Dokki 公開內容。
+不得把 OAuth／API Token 寫入文件、原始碼、commit、終端截圖或 Dokki 公開內容。若改為 CI 自動部署，另建立最小權限 API Token，並只存於 CI secret。
 
 最小權限至少需要：
 
@@ -43,12 +45,18 @@ Preview branch：`brand-rc-2`
 ```sh
 PROJECT_NAME=penfungo-web
 DEPLOY_DIR=0605
-PREVIEW_BRANCH=brand-rc-2
+PREVIEW_BRANCH=brand-mvp-v1
 PRODUCTION_BRANCH=main
 EVENT_PATH=events/mangzhong-2026-0605
 ```
 
-部署時 Makefile 會優先讀取 `CLOUDFLARE_API_TOKEN`，否則讀取 `.cloudflare_token`。下列檢查不得印出 token 內容：
+互動式發布先確認 Wrangler OAuth 狀態：
+
+```sh
+npx -y wrangler whoami
+```
+
+若改用 Makefile／CI，則優先讀取 `CLOUDFLARE_API_TOKEN`，否則讀取 `.cloudflare_token`。下列檢查不得印出 token 內容：
 
 ```sh
 test -n "$CLOUDFLARE_API_TOKEN" || test -s .cloudflare_token
@@ -136,11 +144,11 @@ python3 -m http.server 8770 --directory 0605
 
 > Python 靜態伺服器不會套用 Cloudflare `_headers`、`_redirects` 或自訂 404 行為；這三項必須在 Preview 再驗。
 
-## 5. Preview｜`brand-rc-2`
+## 5. Preview｜`brand-mvp-v1`
 
 ### 5.1 取得遠端基線
 
-取得 token 後，先列出現有 deployment，保存輸出但不得包含 token：
+確認 Wrangler 已登入後，先列出現有 deployment。下列環境變數僅供 API Token／CI 流程；互動式 OAuth 不必設定 token：
 
 ```sh
 export CLOUDFLARE_API_TOKEN='由專案擁有者提供的 token'
@@ -159,11 +167,11 @@ CLOUDFLARE_API_TOKEN="$CLOUDFLARE_API_TOKEN" \
 CLOUDFLARE_ACCOUNT_ID="$CLOUDFLARE_ACCOUNT_ID" \
 npx -y wrangler pages deploy 0605 \
   --project-name=penfungo-web \
-  --branch=brand-rc-2
+  --branch=brand-mvp-v1
 ```
 
 - [ ] 保存 Wrangler 回傳的唯一 deployment URL 與 deployment ID。
-- [ ] 保存分支別名；預期格式為 `brand-rc-2.penfungo-web.pages.dev`，以 Wrangler／Dashboard 實際結果為準。
+- [ ] 保存分支別名；預期格式為 `brand-mvp-v1.penfungo-web.pages.dev`，以 Wrangler／Dashboard 實際結果為準。
 - [ ] 確認 production 自訂網域 `penfungo.com` 沒有受到 preview 部署影響。
 
 ### 5.3 Preview 驗收
@@ -193,7 +201,16 @@ curl -sSIL "https://<preview-deployment-url>/"
 - [ ] 沒有混合內容、404 資產、主控台錯誤或明顯 CLS。
 - [ ] 品牌／內容負責人簽核首版公開頁清單。
 
-Preview 驗收失敗時，不得以 `--branch=main` 重試；修正後重新部署 `brand-rc-2`，並用新的唯一 deployment URL 完整回歸。
+Preview 驗收失敗時，不得以 `--branch=main` 重試；修正後重新部署 `brand-mvp-v1`，並用新的唯一 deployment URL 完整回歸。
+
+### 5.4 2026-09-20 實際發布紀錄
+
+- Git source：`1dec8f2`
+- Deployment ID：`9ce17207-10d1-4ae9-9315-e9154af0c692`
+- 唯一網址：`https://9ce17207.penfungo-web.pages.dev/`
+- 分支別名：`https://brand-mvp-v1.penfungo-web.pages.dev/`
+- 驗證結果：品牌主要路由與既有活動頁 `200`；`/journal/` `404`；Preview 回應含 `X-Robots-Tag: noindex`。
+- Production 狀態：`https://penfungo.com/` 仍維持發布前活動頁 `302`，未被 Preview 變更。
 
 ## 6. Production｜`main`
 
@@ -298,7 +315,7 @@ Preview deployment 不能作為 rollback 目標；只能回滾到先前成功的
 Release: v0.1.0-rc.2 / v1.0.0
 Git commit:
 Cloudflare project: penfungo-web
-Environment: preview brand-rc-2 / production main
+Environment: preview brand-mvp-v1 / production main
 Deployment ID:
 Unique deployment URL:
 Branch alias:
