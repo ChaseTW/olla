@@ -71,7 +71,10 @@ case results, partners or publication permissions.
 The approved page-direction split is: C 共作長桌 for the homepage, A 工作桌 for
 About, and B 流域索引 for work/case pages. Detailed context and release gates are
 in `docs/penfungo-production-plan.md` and
-`docs/penfungo-site-architecture-v1.md`.
+`docs/penfungo-site-architecture-v1.md`. Reuse the visual and brand rules in
+`docs/penfungo-design-system.md` and `docs/penfungo-brand-system.md`; the future
+React migration is scoped in `docs/react-migration-plan.md` and must not reshape
+the site merely to demonstrate a framework.
 
 ### Event page port lineage (read before editing the campaign)
 
