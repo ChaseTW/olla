@@ -1,8 +1,6 @@
 # Cloudflare Pages — 轉址規則
 # https://developers.cloudflare.com/pages/configuration/redirects/
 
-# 暫時：apex 導向活動頁（penfungo.com 品牌首頁上線後，刪除此行）
-/    /events/mangzhong-2026-0605/    302
-
 # 正規化：移除 index.html 結尾，集中權重到乾淨網址
+/index.html    /    301
 /events/mangzhong-2026-0605/index.html    /events/mangzhong-2026-0605/    301

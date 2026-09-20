@@ -1,7 +1,8 @@
 # ═══════════════════════════════════════════════════════════════
-#  Makefile — 順事·芒種 餐酒會網站 · penfungo.com
+#  Makefile — 屏方根主網站與活動頁 · penfungo.com
 #
-#    make preview      本機預覽（http://localhost:8000）
+#    make preview      本機預覽完整網站（http://localhost:8000）
+#    make preview-event 只預覽既有活動頁
 #    make deploy       部署網站內容到 Cloudflare Pages
 #    make plan         Terraform：預覽基礎設施變更
 #    make apply        Terraform：套用基礎設施變更
@@ -15,7 +16,8 @@
 
 PROJECT    := penfungo-web
 DEPLOY_DIR := 0605
-SITE_DIR   := 0605/events/mangzhong-2026-0605
+SITE_DIR   := 0605
+EVENT_DIR  := 0605/events/mangzhong-2026-0605
 ACCOUNT_ID := 243d322c6ffaec5be3a06d4525582630
 PORT       := 8000
 
@@ -23,12 +25,13 @@ PORT       := 8000
 CF_TOKEN := $(or $(CLOUDFLARE_API_TOKEN),$(strip $(shell cat .cloudflare_token 2>/dev/null)))
 
 .DEFAULT_GOAL := help
-.PHONY: help preview deploy plan apply infra-init _token
+.PHONY: help preview preview-event deploy plan apply infra-init _token
 
 help:
-	@echo "順事·芒種 · penfungo.com"
+	@echo "屏方根主網站 · penfungo.com"
 	@echo ""
-	@echo "  make preview      本機預覽 → http://localhost:$(PORT)"
+	@echo "  make preview      完整網站預覽 → http://localhost:$(PORT)"
+	@echo "  make preview-event 既有活動頁預覽 → http://localhost:$(PORT)"
 	@echo "  make deploy       部署網站內容到 Cloudflare Pages"
 	@echo "  make plan         Terraform 預覽基礎設施變更"
 	@echo "  make apply        Terraform 套用基礎設施變更"
@@ -40,6 +43,10 @@ help:
 preview:
 	@echo "預覽 → http://localhost:$(PORT)   （Ctrl+C 結束）"
 	@python3 -m http.server $(PORT) --directory $(SITE_DIR)
+
+preview-event:
+	@echo "活動頁預覽 → http://localhost:$(PORT)   （Ctrl+C 結束）"
+	@python3 -m http.server $(PORT) --directory $(EVENT_DIR)
 
 # 內部：確認 token 存在，否則中止並提示
 _token:
