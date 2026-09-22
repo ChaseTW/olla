@@ -1,8 +1,19 @@
 # PenFunGo React Migration Plan
 
-版本：0.1  
+版本：0.2
 建立：2026-09-20  
-狀態：MVP 後續規劃；不阻塞目前靜態站發布
+更新：2026-09-22
+狀態：R0–R2 第一輪已實作；React 候選版尚未取代 production
+
+## 0. 目前實作
+
+- React、TypeScript、Vite 與 React Router 已建立。
+- 品牌頁在建置時預渲染完整 HTML，不依賴 SPA fallback。
+- 首頁、About、Services、Work、4 個案例、Contact 與 404 已 React 化。
+- 案例由 `src/content/cases.ts` 的受控 schema 產生，不再複製四份頁面。
+- 設計 token 位於 `src/styles/tokens.css`；A／B／C 敘事保留為不同 composition。
+- 既有活動頁由 build script 原樣複製，validator 會檢查核心檔案 byte parity。
+- React 輸出位於 `dist-react/`；目前 production 仍部署 `0605/`。
 
 ## 1. 遷移原則
 
@@ -150,4 +161,3 @@ production build 只能接受 `approved`／`published`，撤下狀態不輸出�
 - 鍵盤、焦點、手機選單、reduced motion 和 404 行為一致。
 - Cloudflare preview、production 與 rollback 有文件化且實測。
 - Design System token 和 Brand System 是元件與內容評審的共同依據。
-

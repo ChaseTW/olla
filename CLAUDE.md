@@ -4,11 +4,11 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-PenFunGo's static multi-page brand site plus preserved campaign pages. The main
-site introduces the company, services and approved work; the existing 順事·芒種
-event landing page remains available at its stable URL. There is no framework,
-build system or package manager. Cloudflare Pages Direct Upload serves the whole
-`0605/` tree under `penfungo.com`.
+PenFunGo's brand site plus preserved campaign pages. The currently deployed MVP
+remains in `0605/`; the React + TypeScript + Vite migration lives in `src/` and
+builds prerendered HTML into `dist-react/`. The existing 順事·芒種 event landing
+page remains available at its stable URL and is copied byte-for-byte into the
+React build. Cloudflare Pages Direct Upload still serves a complete static tree.
 
 The first brand-site release deliberately excludes 地方筆記. Do not add
 `/journal/` links or empty routes until its content and Dokki publication flow
@@ -42,6 +42,17 @@ python3 -m http.server 8000 --directory 0605
 
 `make preview-event` remains available when working only on the campaign page.
 
+React candidate:
+
+```sh
+npm install
+npm run dev
+npm run build
+make preview-react
+```
+
+`npm run build` type-checks, creates the client and SSR bundles, prerenders every
+brand route, copies the stable campaign, and runs structural/parity validation.
 `_headers` / `_redirects` only take effect on Cloudflare Pages, not on a plain
 HTTP server.
 
@@ -62,11 +73,18 @@ the deployment.
 
 ### Brand site
 
-The brand pages share `0605/shared.css` and `0605/shared.js`. Keep navigation,
-mobile behavior, reduced-motion handling and static route paths consistent across
-all brand pages. The first release is static: a visible contact form must not claim
-that data was sent until a real endpoint exists. Do not invent email addresses,
-case results, partners or publication permissions.
+The deployed static pages share `0605/shared.css` and `0605/shared.js`. The React
+candidate uses `src/components/`, `src/content/`, and semantic tokens in
+`src/styles/`. Keep navigation, mobile behavior, reduced-motion handling and
+static route paths consistent across both implementations until cutover. A
+visible contact form must not claim that data was sent until a real endpoint
+exists. Do not invent email addresses, case results, partners or publication
+permissions.
+
+The React output is static HTML, not an SPA-only release. New routes must be added
+to `src/app/metadata.ts` so the prerenderer creates a directly addressable file.
+Run `npm run build` after route or asset changes. Do not deploy `dist-react/` to
+production until its preview passes the release checklist and content gates.
 
 The approved page-direction split is: C 共作長桌 for the homepage, A 工作桌 for
 About, and B 流域索引 for work/case pages. Detailed context and release gates are
