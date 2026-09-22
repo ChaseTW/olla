@@ -25,11 +25,28 @@ async function copyStaticFiles() {
   )
 }
 
+function escapeAttribute(value) {
+  return value.replaceAll('&', '&amp;').replaceAll('"', '&quot;').replaceAll('<', '&lt;').replaceAll('>', '&gt;')
+}
+
 function inject(template, url) {
   const { html, metadata } = render(url)
+  const isNotFound = url === '/not-found/'
+  const canonicalUrl = `https://penfungo.com${url}`
+  const head = [
+    `<meta name="description" content="${escapeAttribute(metadata.description)}">`,
+    isNotFound ? '<meta name="robots" content="noindex,nofollow">' : `<link rel="canonical" href="${canonicalUrl}">`,
+    '<meta property="og:locale" content="zh_TW">',
+    '<meta property="og:type" content="website">',
+    '<meta property="og:site_name" content="屏方根 PenFunGo">',
+    `<meta property="og:title" content="${escapeAttribute(metadata.title)}">`,
+    `<meta property="og:description" content="${escapeAttribute(metadata.description)}">`,
+    isNotFound ? '' : `<meta property="og:url" content="${canonicalUrl}">`,
+    '<meta name="twitter:card" content="summary">',
+  ].filter(Boolean).join('\n    ')
   return template
     .replace(/<title>.*?<\/title>/, `<title>${metadata.title}</title>`)
-    .replace('<!--app-head-->', `<meta name="description" content="${metadata.description}">`)
+    .replace('<!--app-head-->', head)
     .replace('<!--app-html-->', html)
 }
 

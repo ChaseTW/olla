@@ -17,7 +17,7 @@
 # ═══════════════════════════════════════════════════════════════
 
 PROJECT    := penfungo-web
-DEPLOY_DIR := 0605
+DEPLOY_DIR := dist-react
 SITE_DIR   := 0605
 EVENT_DIR  := 0605/events/mangzhong-2026-0605
 REACT_DIR  := dist-react
