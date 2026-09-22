@@ -23,7 +23,7 @@ export function ServicesPage() {
       <section className="service-hero page-section">
         <p data-reveal>合作不是套用方案，<br />而是先把條件攤開。</p>
         <h1 data-reveal>你帶著一件事來，<br />我們一起找到它的根。</h1>
-        <figure data-reveal><img src="/penfungo-assets/worktable-wide.jpg" alt="工作桌上的紙張、器皿與植物材料" width="1536" height="1024" fetchPriority="high" /></figure>
+        <figure data-reveal><img src="/penfungo-assets/role-brand.jpg" alt="品牌夥伴在工作桌上比較紙材、包裝試作與地方材料" width="1024" height="1536" fetchPriority="high" /></figure>
       </section>
       <section className="service-list page-section">
         {services.map((service) => (
@@ -49,7 +49,6 @@ export function ServicesPage() {
         <div>
           <details><summary>還沒有完整企劃，也能開始討論嗎？</summary><p>可以先整理目前的現況、希望改變的問題，以及你所在的單位。合作範圍依初步交流再確認。</p></details>
           <details><summary>如何確認每個夥伴的分工？</summary><p>依個案需求說明屏方根、委託方與製作夥伴的責任；資源對接不等於補助、採購或標案結果的保證。</p></details>
-          <p className="small-note">服務名稱與接洽說明為網站文案提案，正式承接內容依團隊確認。</p>
         </div>
       </section>
       <section className="page-next page-section">

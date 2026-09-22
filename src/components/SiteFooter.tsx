@@ -12,7 +12,6 @@ export function SiteFooter() {
         <Link to="/work/">合作案例</Link>
         <Link to="/contact/">聊聊合作</Link>
       </nav>
-      <p className="preview-notice">React 遷移預覽 · 影像為生成概念素材，文案與案例公開資料仍待定稿。</p>
     </footer>
   )
 }

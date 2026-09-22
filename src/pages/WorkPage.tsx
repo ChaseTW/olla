@@ -18,7 +18,7 @@ export function WorkPage() {
           <span>沿著需求、選擇與參與者，理解一件合作如何發生。</span>
         </div>
         <figure>
-          <img src="/penfungo-assets/worktable-wide.jpg" alt="一雙手在明暗交界的工作桌上整理材料與紙張" width="1536" height="1024" fetchPriority="high" />
+          <img src="/penfungo-assets/role-public.jpg" alt="不同世代的地方夥伴圍著地圖討論場域與共同工作" width="1024" height="1536" fetchPriority="high" />
           <figcaption><strong>不只看見成果</strong>也看見它如何被照料、如何被做成。</figcaption>
         </figure>
       </section>

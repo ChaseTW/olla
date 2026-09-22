@@ -6,40 +6,40 @@ const seats = [
     title: '帶來材料、技術與生活裡的判斷',
     body: '哪一個步驟不能快？哪一種說法容易誤解？讓真正做事的人先說。',
     voice: '我希望你看見的，不只是一件完成品。',
-    image: '/penfungo-assets/work-process-portrait.jpg',
+    image: '/penfungo-assets/role-maker.jpg',
     alt: '工作者正在整理材料與手寫紀錄',
-    width: 1152,
-    height: 1440,
+    width: 1024,
+    height: 1536,
   },
   {
     role: '品牌與企業',
     title: '帶來資源，也說清楚想一起完成什麼',
     body: '合作不是把地方當素材庫，而是共同找到產品、溝通與長期關係的可能。',
     voice: '資源進來，也要讓價值留下。',
-    image: '/penfungo-assets/worktable-wide.jpg',
+    image: '/penfungo-assets/role-brand.jpg',
     alt: '桌面上的包裝試作、紙張與植物材料',
-    width: 1536,
-    height: 1024,
+    width: 1024,
+    height: 1536,
   },
   {
     role: '公部門與組織',
     title: '讓公共目的和現場條件互相聽見',
     body: '把政策語言轉回生活問題，也把地方需求整理成可以協作與執行的方式。',
     voice: '一場活動之後，還能留下下一步。',
-    image: '/penfungo-assets/work-process-portrait.jpg',
+    image: '/penfungo-assets/role-public.jpg',
     alt: '光影交界中，雙手把材料放入陶碗',
-    width: 1152,
-    height: 1440,
+    width: 1024,
+    height: 1536,
   },
   {
     role: '屏方根',
     title: '提問、整理、轉譯，再陪事情走一段',
     body: '不搶走地方的聲音；讓資訊變清楚，讓合作看見彼此，也讓知識回到可接續的位置。',
     voice: '我們不站在桌子的正中央。',
-    image: '/penfungo-assets/worktable-wide.jpg',
+    image: '/penfungo-assets/role-penfungo.jpg',
     alt: '有人在工作桌邊閱讀並整理地方資料',
-    width: 1536,
-    height: 1024,
+    width: 1024,
+    height: 1536,
   },
 ]
 
@@ -69,11 +69,24 @@ export function HomePage() {
         <p className="home-intro__note">留白不是把地方清空，而是為具體的人留下被理解的位置。</p>
       </section>
 
-      <section className="long-table">
+      <section className="long-table" id="table">
         <header data-reveal>
           <h2>一張桌子，四種位置</h2>
           <p>每一次合作，都從坐在不同位置上的人開始。</p>
         </header>
+        <figure className="long-table__scene" data-reveal>
+          <img
+            src="/penfungo-assets/long-table-scene.jpg"
+            alt="南方工作室裡，地方工作者與品牌夥伴圍著長桌整理材料、地圖與包裝試作"
+            width="1774"
+            height="887"
+            loading="lazy"
+          />
+          <figcaption>
+            <span>共作長桌</span>
+            <p>材料、手寫紀錄與不同角色，在同一張桌上被慢慢說清楚。</p>
+          </figcaption>
+        </figure>
         <div className="long-table__rows">
           {seats.map((seat, index) => (
             <article className="table-seat" data-reveal key={seat.role}>

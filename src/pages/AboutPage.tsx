@@ -17,8 +17,8 @@ export function AboutPage() {
           <small>品牌經營與整合・企業合作・政府媒合</small>
         </div>
         <figure data-reveal>
-          <img src="/penfungo-assets/worktable-wide.jpg" alt="遮蔭的工作桌上，一雙手正在整理植物材料、紙張和包裝試作" width="1536" height="1024" fetchPriority="high" />
-          <figcaption>概念影像｜正式內容將以具名採訪拍攝取代</figcaption>
+          <img src="/penfungo-assets/role-penfungo.jpg" alt="工作者在日光裡整理地方照片、材料與關係圖" width="1024" height="1536" fetchPriority="high" />
+          <figcaption>從地方觀察開始，整理出可以共同工作的方向。</figcaption>
         </figure>
       </section>
 
@@ -39,8 +39,8 @@ export function AboutPage() {
 
       <section className="workbench page-section">
         <figure data-reveal>
-          <img src="/penfungo-assets/work-process-portrait.jpg" alt="工作者在遮蔭的桌邊，將深色植物種子分裝進陶碗" width="1152" height="1440" loading="lazy" />
-          <figcaption>概念影像｜工作、材料與判斷，會成為正式攝影主體</figcaption>
+          <img src="/penfungo-assets/role-maker.jpg" alt="地方工作者在遮蔭的桌邊整理種子、纖維與植物材料" width="1024" height="1536" loading="lazy" />
+          <figcaption>材料會留下痕跡，人的判斷也應該被看見。</figcaption>
         </figure>
         <div className="workbench__copy" data-reveal>
           <p>一次合作，從一個好問題開始</p>

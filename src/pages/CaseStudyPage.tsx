@@ -13,11 +13,10 @@ export function CaseStudyPage() {
         <nav className="breadcrumbs" aria-label="麵包屑"><Link to="/">首頁</Link><Link to="/work/">合作案例</Link><span>{item.category}</span></nav>
         <p>{item.category}</p>
         <h1>{item.title}</h1>
-        <div className="case-hero__lead"><p>{item.lead}</p><span>內容狀態：{item.publicationStatus === 'review' ? '待核准' : item.publicationStatus}</span></div>
+        <div className="case-hero__lead"><p>{item.lead}</p></div>
         <dl>
           <div><dt>屏方根的角色</dt><dd>{item.role}</dd></div>
           <div><dt>合作關係</dt><dd>{item.relationship}</dd></div>
-          <div><dt>內容狀態</dt><dd>{item.contentStatus}</dd></div>
         </dl>
       </header>
       <section className={`case-cover case-cover--${item.coverTone}`}>
@@ -36,7 +35,6 @@ export function CaseStudyPage() {
               {index === 1 ? <blockquote>{item.quote}</blockquote> : null}
             </section>
           ))}
-          <p className="small-note">本頁為案例敘事與版面提案。正式版本以核准素材補齊過程、影像與成果。</p>
         </article>
       </div>
       <section className="page-next page-section">

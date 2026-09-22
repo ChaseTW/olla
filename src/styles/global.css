@@ -26,7 +26,6 @@ button { cursor: pointer; }
 .site-footer__identity { display: flex; flex-direction: column; }
 .site-footer__identity strong { color: var(--color-ink); font-size: .95rem; }
 .site-footer nav { display: flex; gap: 1.5rem; }
-.preview-notice { grid-column: 1 / -1; font-size: .75rem; }
 .page-section { padding: var(--space-section) var(--space-page); }
 .text-link { display: inline-block; padding: .35rem 0; color: var(--color-brand-blue); border-bottom: 2px solid currentColor; font-weight: 550; }
 .text-link--light { color: white; }
